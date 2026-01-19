@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Film director working in intimate, experimental cinema. Exploring themes of isolation, memory, and human connection." />
+    <meta name="author" content="Gareth Gerrard">
+    <title>Gareth Gerrard — Film Director</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z3PFP8PRQG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Z3PFP8PRQG');
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --text: #e8e8e8;
+            --text-dim: #999;
+            --accent: #fff;
+            --border: #222;
+            --ease: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @font-face {
+            font-family: 'Fraunces';
+            font-style: normal;
+            font-weight: 300 900;
+            src: url('data:text/plain;base64,') format('woff2');
+        }
+
+        body {
+            font-family: 'Crimson Pro', 'Palatino', 'Georgia', serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2 {
+            font-family: 'Cormorant Garamond', 'Didot', 'Bodoni MT', serif;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.95;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.01em;
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            max-width: 65ch;
+        }
+
+        a {
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s var(--ease);
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* Layout */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 3rem 4rem;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+
+        nav a {
+            display: block;
+            color: var(--accent);
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border: none;
+            opacity: 0.8;
+            transition: opacity 0.3s var(--ease);
+        }
+
+        nav a:hover {
+            opacity: 1;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 8rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeIn 1s var(--ease) forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.4s; }
+        section:nth-child(4) { animation-delay: 0.6s; }
+        section:nth-child(5) { animation-delay: 0.8s; }
+        section:nth-child(6) { animation-delay: 1s; }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Home */
+        #home {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(180deg, transparent 0%, var(--bg) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23111" width="1200" height="800"/><g opacity="0.3"><circle cx="200" cy="150" r="300" fill="url(%23g1)"/><circle cx="1000" cy="600" r="250" fill="url(%23g2)"/></g><defs><radialGradient id="g1"><stop offset="0%" stop-color="%23333"/><stop offset="100%" stop-color="transparent"/></radialGradient><radialGradient id="g2"><stop offset="0%" stop-color="%23222"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs></svg>') center/cover;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 4rem;
+            font-weight: 300;
+        }
+
+        .intro {
+            max-width: 50ch;
+            font-size: 1.375rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        /* Films Grid */
+        .films-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 6rem 4rem;
+            margin-top: 4rem;
+        }
+
+        .film-card {
+            opacity: 0;
+            animation: slideUp 0.8s var(--ease) forwards;
+        }
+
+        .film-card:nth-child(1) { animation-delay: 0.1s; }
+        .film-card:nth-child(2) { animation-delay: 0.2s; }
+        .film-card:nth-child(3) { animation-delay: 0.3s; }
+        .film-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            background: var(--border);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .placeholder-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .film-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .film-meta span {
+            border-right: 1px solid var(--border);
+            padding-right: 1rem;
+        }
+
+        .film-meta span:last-child {
+            border: none;
+        }
+
+        .film-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+
+        .early-work {
+            margin-top: 6rem;
+            padding-top: 6rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .early-work h3 {
+            font-size: 0.875rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        /* Development */
+        #development .project {
+            max-width: 800px;
+            margin-top: 3rem;
+        }
+
+        .logline {
+            font-size: 1.5rem;
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            font-weight: 300;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--border);
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            color: var(--text-dim);
+        }
+
+        /* About */
+        .bio {
+            max-width: 70ch;
+            font-size: 1.25rem;
+            line-height: 1.8;
+        }
+
+        .bio p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact */
+        #contact a {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s var(--ease);
+            width: fit-content;
+        }
+
+        #contact a:hover {
+            border-bottom-color: var(--accent);
+            transform: translateX(8px);
+        }
+
+        .social-links {
+            margin-top: 3rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .social-links a {
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        /* Divider */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--border);
+            margin: 3rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 6rem 2rem;
+            }
+
+            nav {
+                padding: 2rem;
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: var(--bg);
+                border-top: 1px solid var(--border);
+                display: flex;
+                justify-content: space-around;
+                mix-blend-mode: normal;
+            }
+
+            nav a {
+                margin: 0;
+                font-size: 0.75rem;
+            }
+
+            .films-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .intro {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Crimson+Pro:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#films">Films</a>
+        <a href="#development">Development</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="home">
+        <div class="container">
+            <h1>Gareth Gerrard</h1>
+            <div class="subtitle">Film Director</div>
+            <p class="intro">
+                I make intimate, experimental films that explore what it means to be human, moving between realism, wonder, and reflection.
+            </p>
+        </div>
+    </section>
+
+    <section id="films">
+        <div class="container">
+            <h2>Films</h2>
+            <div class="films-grid">
+                <div class="film-card">
+                   <div class="video-wrapper">
+   <img src="images/FP.jpg" alt="Film still from For Sale" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+</div>
+                    <h3>The SOLD Trilogy - For Sale</h3>
+                    <div class="film-meta">
+                        <span>2011</span>
+                        <span>15 min</span>
+                    </div>
+                    <p class="film-description">
+                        After her family receives a grave diagnosis, Emma does what she can to help her father.
+                    </p>
+                </div>
+
+                <div class="film-card">
+                   <div class="video-wrapper">
+    <img src="images/EX.jpg" alt="Film still from EXPORT" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+</div>
+                    <h3>The SOLD Trilogy - EXPORT</h3>
+                    <div class="film-meta">
+                        <span>2015</span>
+                        <span>14 min</span>
+                    </div>
+                    <p class="film-description">
+                       Jelena begins a new life in the United Kingdom with a new love interest, only to discover that not all is as it seems.
+                    </p>
+                </div>
+
+                <div class="film-card">
+                   <div class="video-wrapper">
+    <img src="images/IK.jpg" alt="Film still from I Know (Music Video)" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+</div>
+                    <h3>DAVID LYNCH - I Know (Music Video)</h3>
+                    <div class="film-meta">
+                        <span>2016</span>
+                        <span>5 min</span>
+                    </div>
+                    <p class="film-description">
+                        An avant-garde experimental piece set to the music of David Lynch, created as a fan-made tribute.
+                    </p>
+                </div>
+
+                <div class="film-card">
+                    <div class="video-wrapper">
+                        <img src="images/LO.jpg" alt="Film still from LOLITA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3>LOLITA - Concept Trailer</h3>
+                    <div class="film-meta">
+                        <span>2017</span>
+                        <span>5 min</span>
+                    </div>
+                    <p class="film-description">
+                        A powerful fully-experimental concept trailer.</p>
+ <p> Unfinished, unreleased.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="development">
+        <div class="container">
+            <h2>In Development</h2>
+            <div class="project">
+                <h3>BLACK FLAG - Illegal Alien</h3>
+                <div class="status">Script Completed</div>
+                <p class="logline">
+                    "A weary trafficker smuggling immigrants to 'safety' hides a grim secret - forcing him to confront his own complicity in a horrifying system."
+                </p>
+                <div class="divider"></div>
+                <p>
+                    This project blends sci-fi horror with dystopian realism, exploring exploitation, complicity, and systemic power structures. It questions how individuals become trapped within larger forces, unable to escape their roles - whether by choice or circumstance. 
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About</h2>
+            <div class="bio">
+              <p>
+Gareth Gerrard is a film director. His films have screened at genre festivals internationally and explore themes of isolation, memory, and the limits of human connection.
+</p>
+ <p>
+He worked in, photography, design, video production and art direction, which informed his approach to visual storytelling—precise, considered, and built around negative space as much as image.
+</p>
+ <p>
+He is currently seeking collaborators and funding for his next short film, while writing feature films.
+</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact</h2>
+<a href="mailto:altarfilms@gmail.com">altarfilms@gmail.com</a>
+            <div class="social-links">
+                <a href="https://ggerrard.substack.com" target="_blank">Substack</a>
+                <a href="https://instagram.com/ggerrard" target="_blank">Instagram</a>
+		<a href="https://x.com/ggerrard" target="_blank">X</a>
+	</div>
+        </div>
+    </section>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scroll with offset for fixed nav
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Lazy animation trigger on scroll
+        const observerOptions = {
+       
