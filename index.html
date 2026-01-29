@@ -451,6 +451,18 @@
             }
         }
 
+        /* CRITICAL MOBILE OVERRIDES - Must come last */
+        @media (max-width: 932px) {
+            section#films,
+            section#about {
+                min-height: 0 !important;
+                padding-top: 5rem !important;
+                padding-bottom: 2rem !important;
+                justify-content: flex-start !important;
+                align-items: flex-start !important;
+            }
+        }
+
         /* Smooth scroll */
         html {
             scroll-behavior: smooth;
@@ -687,6 +699,8 @@ He is currently developing a new short film and feature-length projects, based i
         <div class="container">
             <h2>Contact</h2>
 <a href="mailto:altarfilms@gmail.com">altarfilms@gmail.com</a>
+            <div class="social-links">
+				
 	</div>
             <p style="margin-top: 4rem; font-size: 0.875rem; color: var(--text-dim); opacity: 0.6;">
                 © <script>document.write(new Date().getFullYear());</script> Gareth Gerrard. All Rights Reserved.
