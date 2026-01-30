@@ -149,6 +149,7 @@
         #home {
             position: relative;
             overflow: hidden;
+            align-items: center;
         }
 
         #home::before {
@@ -358,7 +359,7 @@
         /* Responsive */
         @media (max-width: 932px) {
             section {
-                padding: 6rem 2rem 4rem 2rem;
+                padding: 3rem 2rem;
             }
 
             #home {
@@ -366,12 +367,13 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding-top: 0;
+                padding: 3rem 2rem;
             }
 
             #home .container {
                 display: flex;
                 flex-direction: column;
+                align-items: flex-start;
             }
 
             #home h1,
@@ -381,33 +383,52 @@
 
             #home .intro {
                 text-align: center;
+                align-self: center;
             }
 
             #films {
-                min-height: auto !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: flex-start !important;
-                padding: 5rem 2rem 4rem 2rem !important;
+                min-height: auto;
+                padding-top: 3rem;
+                padding-bottom: 4rem;
+                justify-content: flex-start;
             }
 
             #films h2 {
                 margin-bottom: 1rem;
             }
 
+            #films .films-grid {
+                margin-top: 1.5rem;
+            }
+
             #development {
-                min-height: 100vh;
+                min-height: auto;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                padding: 4rem 2rem;
+            }
+
+            #development .container {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            #development h2 {
+                margin-bottom: 1rem;
+            }
+
+            #development .project {
+                max-width: 100%;
+                margin-top: 1rem;
             }
 
             #about {
-                min-height: auto !important;
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: flex-start !important;
-                padding: 5rem 2rem 4rem 2rem !important;
+                min-height: auto;
+                padding-top: 3rem;
+                padding-bottom: 4rem;
+                justify-content: flex-start;
             }
 
             #contact {
@@ -448,18 +469,6 @@
 
             .intro {
                 font-size: 1.125rem;
-            }
-        }
-
-        /* CRITICAL MOBILE OVERRIDES - Must come last */
-        @media (max-width: 932px) {
-            section#films,
-            section#about {
-                min-height: 0 !important;
-                padding-top: 5rem !important;
-                padding-bottom: 2rem !important;
-                justify-content: flex-start !important;
-                align-items: flex-start !important;
             }
         }
 
@@ -573,7 +582,7 @@
         <div class="container">
             <h1>Gareth Gerrard</h1>
             <div class="subtitle">Film Director</div>
-<p class="intro" style="font-style: italic; font-size: 1.5rem; font-weight: 300; max-width: 55ch; text-align: center;">
+<p class="intro" style="font-style: italic; font-size: 1.5rem; font-weight: 300; max-width: 55ch;">
     "I make intimate, experimental films exploring self and shadow, memory, and the quieter shades of the human condition."
 </p>
         </div>
@@ -703,7 +712,7 @@ He is currently developing a new short film and feature-length projects, based i
 				
 	</div>
             <p style="margin-top: 4rem; font-size: 0.875rem; color: var(--text-dim); opacity: 0.6;">
-                © <script>document.write(new Date().getFullYear());</script> Gareth Gerrard. All Rights Reserved.
+                © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> Gareth Gerrard. All Rights Reserved.
             </p>
         </div>
     </section>
@@ -777,11 +786,19 @@ He is currently developing a new short film and feature-length projects, based i
                 const player = document.getElementById('videoPlayer');
                 overlay.classList.remove('active');
                 player.innerHTML = '';
-                document.body.style.overflow = 'auto';
+                document.body.style.overflow = '';
             }
         }
 
-        // Close video on Escape key
+        // Escape key closes video
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-             
+                const overlay = document.getElementById('videoOverlay');
+                if (overlay.classList.contains('active')) {
+                    closeVideo({ target: overlay });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
