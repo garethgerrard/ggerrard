@@ -324,7 +324,7 @@
         #contact a {
             display: block;
             font-size: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             border-bottom: 1px solid transparent;
             transition: all 0.3s var(--ease);
             width: fit-content;
@@ -336,7 +336,7 @@
         }
 
         .social-links {
-            margin-top: 3rem;
+            margin-top: 2rem;
             display: flex;
             gap: 2rem;
         }
@@ -346,6 +346,35 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--text-dim);
+        }
+
+        .contact-logo {
+            display: block;
+            margin-top: 2rem;
+            width: 100px;
+            height: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s var(--ease);
+        }
+
+        .contact-logo:hover {
+            opacity: 1;
+        }
+
+        .home-logo {
+            position: absolute;
+            top: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: auto;
+            opacity: 0.9;
+            z-index: 50;
+            transition: opacity 0.3s var(--ease);
+        }
+
+        .home-logo:hover {
+            opacity: 1;
         }
 
         /* Divider */
@@ -587,6 +616,7 @@
     </nav>
 
     <section id="home">
+        <img src="images/afl.png" alt="Altar Films Logo" class="home-logo">
         <div class="container">
             <h1>Gareth Gerrard</h1>
             <div class="subtitle">Film Director</div>
@@ -716,11 +746,12 @@ He is currently developing a new short film and feature-length projects, based i
         <div class="container">
             <h2>Contact</h2>
 <a href="mailto:altarfilms@gmail.com">altarfilms@gmail.com</a>
+            <img src="images/afl.png" alt="Altar Films Logo" class="contact-logo">
             <div class="social-links">
 				
 	</div>
-            <p style="margin-top: 4rem; font-size: 0.875rem; color: var(--text-dim); opacity: 0.6;">
-                © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> Gareth Gerrard. All Rights Reserved.
+            <p style="margin-top: 2rem; font-size: 0.875rem; color: var(--text-dim); opacity: 0.6;">
+                © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> Gareth Gerrard. All Rights Reserved.
             </p>
         </div>
     </section>
@@ -801,12 +832,4 @@ He is currently developing a new short film and feature-length projects, based i
         // Escape key closes video
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                const overlay = document.getElementById('videoOverlay');
-                if (overlay.classList.contains('active')) {
-                    closeVideo({ target: overlay });
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+               
