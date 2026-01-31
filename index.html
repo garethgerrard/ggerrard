@@ -442,7 +442,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 4rem 2rem;
+                padding: 4rem 2rem 6rem;
             }
 
             #development .container {
@@ -600,6 +600,25 @@
         .close-video:hover {
             opacity: 0.7;
         }
+
+        .video-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            border: 1px solid var(--border);
+        }
+
+        .video-fallback p {
+            color: var(--text-dim);
+            font-size: 1.125rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            text-align: center;
+            max-width: 40ch;
+        }
     </style>
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -687,7 +706,7 @@
 						<span>Concept Trailer</span>
                     </div>
                     <p class="film-description">
-                        An unfinished, unreleased avant-garde concept trailer exploring tone, atmosphere, and restraint.</p>
+                        An unfinished, unreleased avant-garde concept trailer exploring tone, atmosphere, and restraint.
                     </p>
                 </div>
 
@@ -758,7 +777,7 @@ He is currently developing a new short film and feature-length projects, based i
 				
 	</div>
             <p style="margin-top: 2rem; font-size: 0.875rem; color: var(--text-dim); opacity: 0.6;">
-                © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> Gareth Gerrard. All Rights Reserved.
+                © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> Gareth Gerrard. All Rights Reserved.
             </p>
         </div>
     </section>
@@ -821,7 +840,25 @@ He is currently developing a new short film and feature-length projects, based i
                 embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
             }
             
-            player.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>`;
+            // Show fallback if URL is still a placeholder, otherwise load the embed
+            if (embedUrl.includes('YOUR_VIDEO_ID')) {
+                player.innerHTML = `<div class="video-fallback"><p>This film is not yet available online.</p></div>`;
+            } else {
+                player.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>`;
+                // Fallback: if iframe fails to load a valid video after 3s, show the message
+                setTimeout(() => {
+                    const iframe = player.querySelector('iframe');
+                    if (iframe) {
+                        try {
+                            if (!iframe.contentDocument) {
+                                player.innerHTML = `<div class="video-fallback"><p>This film is not yet available online.</p></div>`;
+                            }
+                        } catch(e) {
+                            // Cross-origin iframe — likely loaded fine, do nothing
+                        }
+                    }
+                }, 3000);
+            }
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -831,4 +868,17 @@ He is currently developing a new short film and feature-length projects, based i
                 const overlay = document.getElementById('videoOverlay');
                 const player = document.getElementById('videoPlayer');
                 overlay.classList.remove('active');
-                p
+                player.innerHTML = '';
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close video on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideo({ target: { id: 'videoOverlay' } });
+            }
+        });
+    </script>
+</body>
+</html>
