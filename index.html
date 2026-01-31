@@ -290,7 +290,7 @@
         }
 
         .logline {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-style: italic;
             line-height: 1.6;
             margin-bottom: 2rem;
@@ -336,9 +336,12 @@
         }
 
         .social-links {
-            margin-top: 2rem;
             display: flex;
             gap: 2rem;
+        }
+
+        .social-links:has(a) {
+            margin-top: 2rem;
         }
 
         .social-links a {
@@ -364,8 +367,7 @@
         .home-logo {
             position: absolute;
             top: 3rem;
-            left: 50%;
-            transform: translateX(-50%);
+            left: max(4rem, calc(50% - 700px));
             width: 80px;
             height: auto;
             opacity: 0.9;
@@ -382,7 +384,7 @@
             width: 60px;
             height: 1px;
             background: var(--border);
-            margin: 3rem 0;
+            margin: 1.5rem 0;
         }
 
         /* Responsive */
@@ -397,6 +399,11 @@
                 justify-content: center;
                 align-items: center;
                 padding: 3rem 2rem;
+            }
+
+            .home-logo {
+                left: 50%;
+                transform: translateX(-50%);
             }
 
             #home .container {
@@ -751,7 +758,7 @@ He is currently developing a new short film and feature-length projects, based i
 				
 	</div>
             <p style="margin-top: 2rem; font-size: 0.875rem; color: var(--text-dim); opacity: 0.6;">
-                © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> Gareth Gerrard. All Rights Reserved.
+                © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> Gareth Gerrard. All Rights Reserved.
             </p>
         </div>
     </section>
@@ -824,12 +831,4 @@ He is currently developing a new short film and feature-length projects, based i
                 const overlay = document.getElementById('videoOverlay');
                 const player = document.getElementById('videoPlayer');
                 overlay.classList.remove('active');
-                player.innerHTML = '';
-                document.body.style.overflow = '';
-            }
-        }
-
-        // Escape key closes video
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-               
+                p
