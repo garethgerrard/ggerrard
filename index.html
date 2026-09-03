@@ -6,14 +6,38 @@
     <meta name="description" content="Official site of Gareth Gerrard, UK film director specialising in experimental and narrative cinema. View films, biography, and contact details." />
     <meta name="author" content="Gareth Gerrard">
     <title>Gareth Gerrard – UK Film Director | Experimental & Narrative Cinema</title>
-    
+    <link rel="canonical" href="https://ggerrard.com/">
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Gareth Gerrard – UK Film Director | Experimental & Narrative Cinema">
+    <meta property="og:description" content="Official site of Gareth Gerrard, UK film director specialising in experimental and narrative cinema. View films, biography, and contact details.">
+    <meta property="og:image" content="https://ggerrard.com/images/afl.png">
+    <meta property="og:url" content="https://ggerrard.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gareth Gerrard – UK Film Director">
+    <meta name="twitter:description" content="Experimental and narrative films by UK director Gareth Gerrard.">
+    <meta name="twitter:image" content="https://ggerrard.com/images/afl.png">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Gareth Gerrard",
+      "jobTitle": "Film Director",
+      "url": "https://ggerrard.com/",
+      "sameAs": [],
+      "description": "UK film director specialising in experimental and narrative cinema."
+    }
+    </script>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z3PFP8PRQG"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-Z3PFP8PRQG');
     </script>
     <style>
@@ -30,13 +54,6 @@
             --accent: #fff;
             --border: #222;
             --ease: cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        @font-face {
-            font-family: 'Fraunces';
-            font-style: normal;
-            font-weight: 300 900;
-            src: url('data:text/plain;base64,') format('woff2');
         }
 
         body {
@@ -213,11 +230,16 @@
 
         .video-wrapper {
             position: relative;
+            display: block;
+            width: 100%;
             padding-bottom: 56.25%;
             background: var(--border);
             margin-bottom: 1.5rem;
             overflow: hidden;
             border: 1px solid var(--border);
+            font: inherit;
+            color: inherit;
+            appearance: none;
         }
 
         .video-wrapper iframe {
@@ -226,6 +248,28 @@
             left: 0;
             width: 100%;
             height: 100%;
+        }
+
+        .film-still {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-wrapper {
+            cursor: pointer;
+        }
+
+        .video-wrapper .play-button {
+            /* keep play button focusable/visible when the trigger is a button element */
+        }
+
+        .video-wrapper:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
         }
 
         .placeholder-video {
@@ -657,17 +701,17 @@
             <h2>Films</h2>
             <div class="films-grid">
                 <div class="film-card">
-                   <div class="video-wrapper" style="cursor: pointer;" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_1')">
-   <img src="images/FS.jpg" alt="Film still from For Sale" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-   <div class="play-button">
-       <div class="play-icon"></div>
-   </div>
-</div>
+                    <button type="button" class="video-wrapper" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_1')" aria-label="Play For Sale">
+                        <img src="images/FS.jpg" alt="Film still from For Sale" class="film-still" loading="lazy">
+                        <div class="play-button">
+                            <div class="play-icon"></div>
+                        </div>
+                    </button>
                     <h3>The SOLD Trilogy - For Sale</h3>
                     <div class="film-meta">
                         <span>2011</span>
                         <span>15 min</span>
-						<span>Short</span>
+                        <span>Short</span>
                     </div>
                     <p class="film-description">
                         After her family receives a grave diagnosis, Emma does what she can to help her father.
@@ -675,17 +719,17 @@
                 </div>
 
                 <div class="film-card">
-                   <div class="video-wrapper" style="cursor: pointer;" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_2')">
-    <img src="images/EX.jpg" alt="Film still from EXPORT" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-    <div class="play-button">
-        <div class="play-icon"></div>
-    </div>
-</div>
+                    <button type="button" class="video-wrapper" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_2')" aria-label="Play EXPORT">
+                        <img src="images/EX.jpg" alt="Film still from EXPORT" class="film-still" loading="lazy">
+                        <div class="play-button">
+                            <div class="play-icon"></div>
+                        </div>
+                    </button>
                     <h3>The SOLD Trilogy - EXPORT</h3>
                     <div class="film-meta">
                         <span>2015</span>
                         <span>14 min</span>
-						<span>Short</span>
+                        <span>Short</span>
                     </div>
                     <p class="film-description">
                        Jelena, a mail-order bride, begins a new life in the United Kingdom, only to discover that not all is as it seems.
@@ -693,17 +737,17 @@
                 </div>
 
                 <div class="film-card">
-                    <div class="video-wrapper" style="cursor: pointer;" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_4')">
-                        <img src="images/LO.jpg" alt="Film still from LOLITA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    <button type="button" class="video-wrapper" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_4')" aria-label="Play LOLITA">
+                        <img src="images/LO.jpg" alt="Film still from LOLITA" class="film-still" loading="lazy">
                         <div class="play-button">
                             <div class="play-icon"></div>
                         </div>
-                    </div>
+                    </button>
                     <h3>LOLITA</h3>
                     <div class="film-meta">
                         <span>2016</span>
                         <span>5 min</span>
-						<span>Concept Trailer</span>
+                        <span>Concept Trailer</span>
                     </div>
                     <p class="film-description">
                         An unfinished, unreleased avant-garde concept trailer exploring tone, atmosphere, and restraint.
@@ -711,17 +755,17 @@
                 </div>
 
                 <div class="film-card">
-                   <div class="video-wrapper" style="cursor: pointer;" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_3')">
-    <img src="images/IK.jpg" alt="Film still from I Know (Music Video)" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
-    <div class="play-button">
-        <div class="play-icon"></div>
-    </div>
-</div>
+                    <button type="button" class="video-wrapper" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_3')" aria-label="Play DAVID LYNCH - I Know">
+                        <img src="images/IK.jpg" alt="Film still from I Know (Music Video)" class="film-still" loading="lazy">
+                        <div class="play-button">
+                            <div class="play-icon"></div>
+                        </div>
+                    </button>
                     <h3>DAVID LYNCH - I Know</h3>
                     <div class="film-meta">
                         <span>2017</span>
                         <span>4 min</span>
-						<span>Music Video</span>
+                        <span>Music Video</span>
                     </div>
                     <p class="film-description">
                         A feverish, experimental piece set to the music of David Lynch, created as a fan-made tribute.
@@ -784,12 +828,9 @@ He is currently developing a new short film and feature-length projects, based i
         <div class="container">
             <h2>Contact</h2>
 <a href="mailto:altarfilms@gmail.com">altarfilms@gmail.com</a>
-            <img src="images/afl.png" alt="Altar Films Logo" class="contact-logo">
-            <div class="social-links">
-				
-	</div>
+            <img src="images/afl.png" alt="Altar Films Logo" class="contact-logo" loading="lazy">
             <p style="margin-top: 2rem; font-size: 0.875rem; color: var(--text-dim); opacity: 0.6;">
-                © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> Gareth Gerrard. All Rights Reserved.
+                © <span id="copyright-year"></span> Gareth Gerrard. All Rights Reserved.
             </p>
         </div>
     </section>
@@ -802,7 +843,11 @@ He is currently developing a new short film and feature-length projects, based i
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // Copyright year
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
         // Smooth scroll with offset for fixed nav
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -855,21 +900,10 @@ He is currently developing a new short film and feature-length projects, based i
             // Show fallback if URL is still a placeholder, otherwise load the embed
             if (embedUrl.includes('YOUR_VIDEO_ID')) {
                 player.innerHTML = `<div class="video-fallback"><p>This film is not yet available online.</p></div>`;
+            } else if (/\.mp4($|\?)/i.test(embedUrl)) {
+                player.innerHTML = `<video src="${embedUrl}" controls autoplay style="width:100%; height:100%;"></video>`;
             } else {
                 player.innerHTML = `<iframe src="${embedUrl}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>`;
-                // Fallback: if iframe fails to load a valid video after 3s, show the message
-                setTimeout(() => {
-                    const iframe = player.querySelector('iframe');
-                    if (iframe) {
-                        try {
-                            if (!iframe.contentDocument) {
-                                player.innerHTML = `<div class="video-fallback"><p>This film is not yet available online.</p></div>`;
-                            }
-                        } catch(e) {
-                            // Cross-origin iframe — likely loaded fine, do nothing
-                        }
-                    }
-                }, 3000);
             }
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
