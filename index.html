@@ -150,11 +150,13 @@
             to { opacity: 1; }
         }
 
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.4s; }
-        section:nth-child(4) { animation-delay: 0.6s; }
-        section:nth-child(5) { animation-delay: 0.8s; }
-        section:nth-child(6) { animation-delay: 1s; }
+        /* Fade-in delay per section, set explicitly via data-index rather than
+           nth-child, so it doesn't silently break if markup order/wrapping changes */
+        section[data-index="1"] { animation-delay: 0.2s; }
+        section[data-index="2"] { animation-delay: 0.4s; }
+        section[data-index="3"] { animation-delay: 0.6s; }
+        section[data-index="4"] { animation-delay: 0.8s; }
+        section[data-index="5"] { animation-delay: 1s; }
 
         .container {
             max-width: 1400px;
@@ -240,14 +242,7 @@
             font: inherit;
             color: inherit;
             appearance: none;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            cursor: pointer;
         }
 
         .film-still {
@@ -259,33 +254,9 @@
             object-fit: cover;
         }
 
-        .video-wrapper {
-            cursor: pointer;
-        }
-
-        .video-wrapper .play-button {
-            /* keep play button focusable/visible when the trigger is a button element */
-        }
-
         .video-wrapper:focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 4px;
-        }
-
-        .placeholder-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-            color: var(--text-dim);
-            font-size: 0.875rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
         }
 
         .film-meta {
@@ -557,6 +528,47 @@
             scroll-behavior: smooth;
         }
 
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            background: var(--accent);
+            color: var(--bg);
+            padding: 0.75rem 1.25rem;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: none;
+            z-index: 1000;
+            transition: top 0.3s var(--ease);
+        }
+
+        .skip-link:focus {
+            top: 1rem;
+        }
+
+        /* Intro quote (home) */
+        .intro--quote {
+            font-style: italic;
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 55ch;
+        }
+
+        /* Copyright line (contact) */
+        .copyright {
+            margin-top: 4rem;
+            font-size: 0.875rem;
+            color: var(--text-dim);
+            opacity: 0.6;
+        }
+
+        /* Superseded project title */
+        .project-title--struck {
+            text-decoration: line-through;
+        }
+
         /* Selection */
         ::selection {
             background: var(--accent);
@@ -677,6 +689,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Crimson+Pro:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
     <nav>
         <a href="#home">Home</a>
         <a href="#films">Films</a>
@@ -685,18 +699,19 @@
         <a href="#contact">Contact</a>
     </nav>
 
-    <section id="home">
+    <main id="main-content">
+    <section id="home" data-index="1">
         <img src="images/afl.png" alt="Altar Films Logo" class="home-logo">
         <div class="container">
             <h1>Gareth Gerrard</h1>
             <div class="subtitle">Film Director</div>
-<p class="intro" style="font-style: italic; font-size: 1.5rem; font-weight: 300; max-width: 55ch;">
-    "I make intimate, experimental films exploring self and shadow, memory, and the quieter shades of the human condition."
-</p>
+            <p class="intro intro--quote">
+                "I make intimate, experimental films exploring self and shadow, memory, and the quieter shades of the human condition."
+            </p>
         </div>
     </section>
 
-    <section id="films">
+    <section id="films" data-index="2">
         <div class="container">
             <h2>Films</h2>
             <div class="films-grid">
@@ -775,7 +790,7 @@
         </div>
     </section>
 
-<section id="development">
+<section id="development" data-index="3">
     <div class="container">
         <h2>In Development</h2>
         <div class="project">
@@ -791,7 +806,7 @@
         </div>
         <div class="divider"></div>
         <div class="project">
-            <h3><span style="text-decoration: line-through;">BLACK FLAG</span> - Illegal Alien</h3>
+            <h3><span class="project-title--struck">BLACK FLAG</span> - Illegal Alien</h3>
             <div class="status">Short Film · Script Completed</div>
             <p class="logline">
                 "A weary trafficker smuggling immigrants to 'safety' hides a grim secret - forcing him to confront his own complicity in a horrifying system."
@@ -804,46 +819,43 @@
     </div>
 </section>
 
-    <section id="about">
+    <section id="about" data-index="4">
         <div class="container">
             <h2>About</h2>
             <div class="bio">
               <p>
-Gareth Gerrard is a film director. 
+Gareth Gerrard is a Birmingham-based film director. His films explore self and shadow, memory, and the quieter shades of the human condition.
 </p>
 <p>
-His films explore self and shadow, memory, and the quieter shades of the human condition.
+A background in photography, video, and music, together with a Master of Arts in Art and Design, informs a visual language that is precise, withheld, and shaped as much by absence as by image.
 </p>
 <p>
-His background in photography, art, design, video production, and music, alongside a Master of Arts degree, informs a visual language that is precise, considered, and shaped as much by absence as by image.
-</p>
-<p>
-He is currently developing a new short film and feature-length projects, based in Birmingham, UK.
+He is developing new short films and feature-length projects, produced under his own banner, Altar Films.
 </p>
             </div>
         </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" data-index="5">
         <div class="container">
             <h2>Contact</h2>
-<a href="mailto:altarfilms@gmail.com">altarfilms@gmail.com</a>
+            <a href="mailto:altarfilms@gmail.com">altarfilms@gmail.com</a>
             <img src="images/afl.png" alt="Altar Films Logo" class="contact-logo" loading="lazy">
-            <p style="margin-top: 2rem; font-size: 0.875rem; color: var(--text-dim); opacity: 0.6;">
+            <p class="copyright">
                 © <span id="copyright-year"></span> Gareth Gerrard. All Rights Reserved.
             </p>
         </div>
     </section>
+    </main>
 
     <!-- Video Overlay -->
-    <div id="videoOverlay" class="video-overlay" onclick="closeVideo(event)">
+    <div id="videoOverlay" class="video-overlay" role="dialog" aria-modal="true" aria-label="Film player" onclick="closeVideo(event)">
         <div class="video-container">
-            <button class="close-video" onclick="closeVideo(event)">×</button>
+            <button class="close-video" onclick="closeVideo(event)" aria-label="Close video">×</button>
             <div id="videoPlayer"></div>
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
         // Copyright year
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
@@ -876,10 +888,15 @@ He is currently developing a new short film and feature-length projects, based i
         });
 
         // Video overlay functions
+        let lastFocusedElement = null;
+
         function openVideo(url) {
             const overlay = document.getElementById('videoOverlay');
             const player = document.getElementById('videoPlayer');
-            
+
+            // Remember what triggered the modal so we can return focus on close
+            lastFocusedElement = document.activeElement;
+
             // Convert regular Vimeo/YouTube URLs to embed format
             let embedUrl = url;
             if (url.includes('vimeo.com')) {
@@ -907,6 +924,10 @@ He is currently developing a new short film and feature-length projects, based i
             }
             overlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Send focus into the dialog for keyboard/screen reader users
+            const closeButton = overlay.querySelector('.close-video');
+            if (closeButton) closeButton.focus();
         }
 
         function closeVideo(event) {
@@ -916,13 +937,32 @@ He is currently developing a new short film and feature-length projects, based i
                 overlay.classList.remove('active');
                 player.innerHTML = '';
                 document.body.style.overflow = '';
+
+                // Return focus to whatever opened the modal
+                if (lastFocusedElement) {
+                    lastFocusedElement.focus();
+                    lastFocusedElement = null;
+                }
             }
         }
 
         // Close video on Escape key
         document.addEventListener('keydown', function(e) {
+            const overlay = document.getElementById('videoOverlay');
+            if (!overlay.classList.contains('active')) return;
+
             if (e.key === 'Escape') {
                 closeVideo({ target: { id: 'videoOverlay' } });
+                return;
+            }
+
+            // Simple focus trap: keep Tab from leaving the dialog. The close
+            // button is the only reliably focusable native element here, so
+            // we just keep focus pinned to it rather than cycling a full list.
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                const closeButton = overlay.querySelector('.close-video');
+                if (closeButton) closeButton.focus();
             }
         });
     </script>
