@@ -146,6 +146,10 @@
             animation: fadeIn 1s var(--ease) forwards;
         }
 
+        section:focus {
+            outline: none;
+        }
+
         @keyframes fadeIn {
             to { opacity: 1; }
         }
@@ -885,6 +889,41 @@ He is developing new short films and feature-length projects, produced under his
 
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
+        });
+
+        // Jump between sections with Option/Alt + Up/Down, like skipping chapter
+        // markers. Also moves focus into the target section (without adding it
+        // to the normal tab order) so keyboard and screen reader users get the
+        // same jump, not just a visual scroll.
+        const jumpSections = Array.from(document.querySelectorAll('main > section'));
+
+        function getCurrentSectionIndex() {
+            const scrollPos = window.scrollY + window.innerHeight * 0.3;
+            let current = 0;
+            jumpSections.forEach((section, i) => {
+                if (section.offsetTop <= scrollPos) current = i;
+            });
+            return current;
+        }
+
+        function jumpToSection(index) {
+            const clamped = Math.max(0, Math.min(jumpSections.length - 1, index));
+            const target = jumpSections[clamped];
+            target.scrollIntoView({ behavior: 'smooth' });
+            target.setAttribute('tabindex', '-1');
+            target.focus({ preventScroll: true });
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (!e.altKey || (e.key !== 'ArrowDown' && e.key !== 'ArrowUp')) return;
+
+            // Don't hijack the shortcut while the video modal is open
+            const overlay = document.getElementById('videoOverlay');
+            if (overlay && overlay.classList.contains('active')) return;
+
+            e.preventDefault();
+            const currentIndex = getCurrentSectionIndex();
+            jumpToSection(currentIndex + (e.key === 'ArrowDown' ? 1 : -1));
         });
 
         // Video overlay functions
