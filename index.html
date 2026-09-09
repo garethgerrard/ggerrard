@@ -136,6 +136,10 @@
             opacity: 1;
         }
 
+        nav a.active {
+            opacity: 1;
+        }
+
         section {
             min-height: 100vh;
             padding: 8rem 4rem;
@@ -889,6 +893,37 @@ He is developing new short films and feature-length projects, produced under his
 
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
+        });
+
+        // Highlight the nav link for whichever section is currently in view.
+        // Uses its own IntersectionObserver (rather than the fade-in one above)
+        // with a narrow band around the vertical center of the viewport, so
+        // the "active" link updates right as a section becomes the dominant
+        // one on screen instead of firing the moment any part of it appears.
+        const navLinks = Array.from(document.querySelectorAll('nav a'));
+        const navLinksBySection = new Map(
+            navLinks.map(link => [link.getAttribute('href').slice(1), link])
+        );
+
+        function setActiveNavLink(sectionId) {
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link === navLinksBySection.get(sectionId));
+            });
+        }
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveNavLink(entry.target.id);
+                }
+            });
+        }, {
+            threshold: 0,
+            rootMargin: '-45% 0px -45% 0px'
+        });
+
+        document.querySelectorAll('main > section[id]').forEach(section => {
+            navObserver.observe(section);
         });
 
         // Jump between sections with Option/Alt + Up/Down, like skipping chapter
