@@ -147,8 +147,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            opacity: 0;
-            animation: fadeIn 1s var(--ease) forwards;
+            animation: fadeIn 1s var(--ease) both;
         }
 
         section:focus {
@@ -156,6 +155,7 @@
         }
 
         @keyframes fadeIn {
+            from { opacity: 0; }
             to { opacity: 1; }
         }
 
@@ -223,8 +223,7 @@
         }
 
         .film-card {
-            opacity: 0;
-            animation: slideUp 0.8s var(--ease) forwards;
+            animation: slideUp 0.8s var(--ease) both;
         }
 
         .film-card:nth-child(1) { animation-delay: 0.1s; }
@@ -252,6 +251,16 @@
             margin-bottom: 1.5rem;
             overflow: hidden;
             border: 1px solid var(--border);
+        }
+
+        .play-trigger {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: none;
+            border: 0;
+            padding: 0;
             font: inherit;
             color: inherit;
             appearance: none;
@@ -267,29 +276,20 @@
             object-fit: cover;
         }
 
-        .video-wrapper:focus-visible {
+        .play-trigger:focus-visible {
             outline: 2px solid var(--accent);
-            outline-offset: 4px;
+            outline-offset: -6px;
         }
 
         .film-meta {
             display: flex;
-            gap: 1rem;
             font-size: 0.875rem;
             color: var(--text-dim);
             margin-bottom: 1rem;
             letter-spacing: 0.05em;
         }
 
-        .film-meta span {
-            border-right: 1px solid var(--border);
-            padding-right: 1rem;
-        }
-
-        .film-meta span:last-child {
-            border: none;
-        }
-
+        
         .film-description {
             font-size: 1rem;
             line-height: 1.7;
@@ -315,6 +315,12 @@
         #development .project {
             max-width: 800px;
             margin-top: 3rem;
+        }
+
+.logline p,
+        .intro p {
+            font-size: inherit;
+            line-height: inherit;
         }
 
         .logline {
@@ -349,7 +355,7 @@
         }
 
         /* Contact */
-        #contact a {
+        #get-in-touch a {
             display: block;
             font-size: 1.5rem;
             margin-bottom: 2rem;
@@ -358,9 +364,16 @@
             width: fit-content;
         }
 
-        #contact a:hover {
+        #get-in-touch a:hover {
             border-bottom-color: var(--accent);
             transform: translateX(8px);
+        }
+
+        .enquiry-text {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
         }
 
         .social-links {
@@ -379,7 +392,7 @@
             color: var(--text-dim);
         }
 
-        .contact-logo {
+        .altar-logo {
             display: block;
             margin-top: 3.5rem;
             width: 100px;
@@ -388,7 +401,7 @@
             transition: opacity 0.3s var(--ease);
         }
 
-        .contact-logo:hover {
+        .altar-logo:hover {
             opacity: 1;
         }
 
@@ -409,6 +422,7 @@
 
         /* Divider */
         .divider {
+            border: 0;
             width: 60px;
             height: 1px;
             background: var(--border);
@@ -497,7 +511,7 @@
                 justify-content: flex-start;
             }
 
-            #contact {
+            #get-in-touch {
                 min-height: 100vh;
                 min-height: 100dvh;
                 justify-content: center;
@@ -575,7 +589,7 @@
         }
 
         /* Copyright line (contact) */
-        .copyright {
+        .site-credit {
             margin-top: 4rem;
             font-size: 0.875rem;
             color: var(--text-dim);
@@ -585,6 +599,11 @@
         /* Superseded project title */
         .project-title--struck {
             text-decoration: line-through;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            section, .film-card { animation: none; }
+            html { scroll-behavior: auto; }
         }
 
         /* Selection */
@@ -621,6 +640,7 @@
         }
 
         .play-icon {
+            display: block;
             width: 0;
             height: 0;
             border-left: 25px solid #0a0a0a;
@@ -709,24 +729,25 @@
 <body>
     <a href="#main-content" class="skip-link">Skip to content</a>
 
-    <nav>
+    <nav aria-label="Primary">
         <a href="#home">Home</a>
         <a href="#films">Films</a>
         <a href="#development">Development</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#get-in-touch">Contact</a>
     </nav>
 
     <main id="main-content">
+    <article>
     <section id="home" data-index="1">
         <img src="images/afl.png" alt="Altar Films Logo" class="home-logo">
-        <div class="container">
+        <header class="container">
             <h1>Gareth Gerrard</h1>
-            <div class="subtitle">Film Director</div>
-            <p class="intro intro--quote">
-                "I make intimate, experimental films exploring self and shadow, memory, and the quieter shades of the human condition."
-            </p>
-        </div>
+            <p class="subtitle">Film Director</p>
+            <blockquote class="intro intro--quote">
+                <p>"I make intimate, experimental films exploring self and shadow, memory, and the quieter shades of the human condition."</p>
+            </blockquote>
+        </header>
     </section>
 
     <section id="films" data-index="2">
@@ -734,72 +755,56 @@
             <h2>Films</h2>
             <div class="films-grid">
                 <div class="film-card">
-                    <button type="button" class="video-wrapper" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_1')" aria-label="Play For Sale">
-                        <img src="images/FS.jpg" alt="Film still from For Sale" class="film-still" loading="lazy">
-                        <div class="play-button">
-                            <div class="play-icon"></div>
-                        </div>
-                    </button>
+                    <figure class="video-wrapper">
+                        <img src="images/FS.jpg" alt="Film still from For Sale" class="film-still">
+                        <button type="button" class="play-trigger" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_1')" aria-label="Play For Sale">
+                            <span class="play-button" aria-hidden="true"><span class="play-icon"></span></span>
+                        </button>
+                    </figure>
                     <h3>The SOLD Trilogy - For Sale</h3>
-                    <div class="film-meta">
-                        <span>2011</span>
-                        <span>15 min</span>
-                        <span>Short</span>
-                    </div>
+                    <p class="film-meta">2011 &middot; 15 min &middot; Short</p>
                     <p class="film-description">
                         After her family receives a grave diagnosis, Emma does what she can to help her father.
                     </p>
                 </div>
 
                 <div class="film-card">
-                    <button type="button" class="video-wrapper" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_2')" aria-label="Play EXPORT">
-                        <img src="images/EX.jpg" alt="Film still from EXPORT" class="film-still" loading="lazy">
-                        <div class="play-button">
-                            <div class="play-icon"></div>
-                        </div>
-                    </button>
+                    <figure class="video-wrapper">
+                        <img src="images/EX.jpg" alt="Film still from EXPORT" class="film-still">
+                        <button type="button" class="play-trigger" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_2')" aria-label="Play EXPORT">
+                            <span class="play-button" aria-hidden="true"><span class="play-icon"></span></span>
+                        </button>
+                    </figure>
                     <h3>The SOLD Trilogy - EXPORT</h3>
-                    <div class="film-meta">
-                        <span>2015</span>
-                        <span>14 min</span>
-                        <span>Short</span>
-                    </div>
+                    <p class="film-meta">2015 &middot; 14 min &middot; Short</p>
                     <p class="film-description">
                        Jelena, a mail-order bride, begins a new life in the United Kingdom, only to discover that not all is as it seems.
                     </p>
                 </div>
 
                 <div class="film-card">
-                    <button type="button" class="video-wrapper" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_4')" aria-label="Play LOLITA">
-                        <img src="images/LO.jpg" alt="Film still from LOLITA" class="film-still" loading="lazy">
-                        <div class="play-button">
-                            <div class="play-icon"></div>
-                        </div>
-                    </button>
+                    <figure class="video-wrapper">
+                        <img src="images/LO.jpg" alt="Film still from LOLITA" class="film-still">
+                        <button type="button" class="play-trigger" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_4')" aria-label="Play LOLITA">
+                            <span class="play-button" aria-hidden="true"><span class="play-icon"></span></span>
+                        </button>
+                    </figure>
                     <h3>LOLITA</h3>
-                    <div class="film-meta">
-                        <span>2016</span>
-                        <span>5 min</span>
-                        <span>Concept Trailer</span>
-                    </div>
+                    <p class="film-meta">2016 &middot; 5 min &middot; Concept Trailer</p>
                     <p class="film-description">
                         An unfinished, unreleased avant-garde concept trailer exploring tone, atmosphere, and restraint.
                     </p>
                 </div>
 
                 <div class="film-card">
-                    <button type="button" class="video-wrapper" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_3')" aria-label="Play DAVID LYNCH - I Know">
-                        <img src="images/IK.jpg" alt="Film still from I Know (Music Video)" class="film-still" loading="lazy">
-                        <div class="play-button">
-                            <div class="play-icon"></div>
-                        </div>
-                    </button>
+                    <figure class="video-wrapper">
+                        <img src="images/IK.jpg" alt="Film still from I Know (Music Video)" class="film-still">
+                        <button type="button" class="play-trigger" onclick="openVideo('https://vimeo.com/YOUR_VIDEO_ID_3')" aria-label="Play DAVID LYNCH - I Know">
+                            <span class="play-button" aria-hidden="true"><span class="play-icon"></span></span>
+                        </button>
+                    </figure>
                     <h3>DAVID LYNCH - I Know</h3>
-                    <div class="film-meta">
-                        <span>2017</span>
-                        <span>4 min</span>
-                        <span>Music Video</span>
-                    </div>
+                    <p class="film-meta">2017 &middot; 4 min &middot; Music Video</p>
                     <p class="film-description">
                         A feverish, experimental piece set to the music of David Lynch, created as a fan-made tribute.
                     </p>
@@ -813,23 +818,23 @@
         <h2>In Development</h2>
         <div class="project">
             <h3>PENANCE</h3>
-            <div class="status">Short Film · Script Completed</div>
-            <p class="logline">
-                "A man asks the only person he can ask to turn his guilt into a mark. She refuses the job, and will only keep him in the bed as the man who did it."
-            </p>
-            <div class="divider"></div>
+            <p class="status">Short Film · Script Completed</p>
+            <blockquote class="logline">
+                <p>"A man asks the only person he can ask to turn his guilt into a mark. She refuses the job, and will only keep him in the bed as the man who did it."</p>
+            </blockquote>
+            <hr class="divider">
             <p>
                 One room, two people, one night. After using Charlotte’s private writing against her, Owen wants pain so he can stay. Charlotte will not become the woman who lets him off. A zero-budget two-hander about refusal, not redemption.
             </p>
         </div>
-        <div class="divider"></div>
+        <hr class="divider">
         <div class="project">
-            <h3><span class="project-title--struck">BLACK FLAG</span> - Illegal Alien</h3>
-            <div class="status">Short Film · Script Completed</div>
-            <p class="logline">
-                "A weary trafficker smuggling immigrants to 'safety' hides a grim secret - forcing him to confront his own complicity in a horrifying system."
-            </p>
-            <div class="divider"></div>
+            <h3><s class="project-title--struck">BLACK FLAG</s> - Illegal Alien</h3>
+            <p class="status">Short Film · Script Completed</p>
+            <blockquote class="logline">
+                <p>"A weary trafficker smuggling immigrants to 'safety' hides a grim secret - forcing him to confront his own complicity in a horrifying system."</p>
+            </blockquote>
+            <hr class="divider">
             <p>
                 This project blends sci-fi horror with dystopian realism, exploring exploitation, complicity, and systemic power structures. It questions how individuals become trapped within larger forces, unable to escape their roles - whether by choice or circumstance.
             </p>
@@ -854,16 +859,18 @@ He is currently developing new short films and feature-length projects, produced
         </div>
     </section>
 
-    <section id="contact" data-index="5">
+    <section id="get-in-touch" data-index="5">
         <div class="container">
             <h2>Contact</h2>
+            <p class="enquiry-text">For enquiries, collaborations and screenings, contact Gareth Gerrard at Altar Films.</p>
             <a href="mailto:altarfilms@gmail.com">altarfilms@gmail.com</a>
-            <img src="images/afl.png" alt="Altar Films Logo" class="contact-logo" loading="lazy">
-            <p class="copyright">
-                © <span id="copyright-year"></span> Gareth Gerrard. All Rights Reserved.
+            <img src="images/afl.png" alt="Altar Films Logo" class="altar-logo">
+            <p class="site-credit">
+                © <span id="copyright-year">2026</span> Gareth Gerrard. All Rights Reserved.
             </p>
         </div>
     </section>
+    </article>
     </main>
 
     <!-- Video Overlay -->
@@ -885,24 +892,6 @@ He is currently developing new short films and feature-length projects, produced
                const target = document.querySelector(this.getAttribute('href'));
                 target.scrollIntoView({ behavior: 'smooth' });
             });
-        });
-
-        // Lazy animation trigger on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
         });
 
         // Highlight the nav link for whichever section is currently in view.
@@ -932,7 +921,7 @@ He is currently developing new short films and feature-length projects, produced
             rootMargin: '-45% 0px -45% 0px'
         });
 
-        document.querySelectorAll('main > section[id]').forEach(section => {
+        document.querySelectorAll('main article > section[id]').forEach(section => {
             navObserver.observe(section);
         });
 
@@ -940,7 +929,7 @@ He is currently developing new short films and feature-length projects, produced
         // markers. Also moves focus into the target section (without adding it
         // to the normal tab order) so keyboard and screen reader users get the
         // same jump, not just a visual scroll.
-        const jumpSections = Array.from(document.querySelectorAll('main > section'));
+        const jumpSections = Array.from(document.querySelectorAll('main article > section'));
 
         function getCurrentSectionIndex() {
             const scrollPos = window.scrollY + window.innerHeight * 0.3;
